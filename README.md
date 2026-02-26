@@ -1,100 +1,109 @@
-*🏥 Hospital Appointment & Medical Record Management System*
-📌 Project Overview
+# 🏥 Hospital Appointment & Medical Record Management System
 
-Hospital Appointment and Medical Record Management System is a backend application built using Spring Boot to manage patients, doctors, appointments, medical records, and prescriptions.
+## 📌 Project Overview
+A backend application built using Spring Boot to manage hospital workflows including patients, doctors, appointments, medical records, and prescriptions. The system enforces real-world business rules and follows a layered architecture design.
 
-The system enforces real-world hospital workflow with proper validation and business logic.
+---
 
-🚀 Features
+## 🚀 Tech Stack
+- Java
+- Spring Boot
+- Spring Data JPA
+- Hibernate
+- PostgreSQL / MySQL
+- REST APIs
+- Maven
+- Postman
 
-Patient registration and management
+---
 
-Doctor management with available days
-
-Appointment booking with lifecycle management (BOOKED → COMPLETED / CANCELED)
-
-Medical record creation only after appointment completion
-
-Prescription creation only if medical record exists
-
-Centralized exception handling
-
-Standardized API response structure
-
-Layered architecture (Controller → Service → DAO → Repository)
-
-🛠 Tech Stack
-
-Java
-
-Spring Boot
-
-Spring Data JPA
-
-Hibernate
-
-PostgreSQL / MySQL
-
-REST APIs
-
-Maven
-
-Postman
-
-🧠 Architecture
-
+## 🏗 Architecture
 The project follows layered architecture:
 
-Controller Layer – Handles HTTP requests and responses
+Controller → Service → DAO → Repository
 
-Service Layer – Contains business logic and validations
+- Controller: Handles HTTP requests and responses
+- Service: Contains business logic
+- DAO: Handles database interaction logic
+- Repository: Extends JPA repository for database operations
 
-DAO Layer – Manages database interaction logic
+---
 
-Repository Layer – Uses Spring Data JPA for persistence
+## 🧩 Core Features
 
-🗂 Entity Relationships
+### 👨‍⚕️ Doctor Management
+- Add, update, delete doctors
+- Store multiple available days using `@ElementCollection`
+- Assign doctors to departments
 
-One Doctor → Many Appointments
+### 👤 Patient Management
+- Register and manage patients
+- Fetch patient details by ID or phone number
 
-One Patient → Many Appointments
+### 📅 Appointment Management
+- Book appointments based on doctor availability
+- Appointment lifecycle management:
+  - BOOKED
+  - COMPLETED
+  - CANCELED
+- Validation to restrict invalid status transitions
 
-One Appointment → One Medical Record
+### 📋 Medical Records
+- Medical records can only be created after appointment completion
+- Linked to both doctor and patient
 
-One Medical Record → One Prescription
+### 💊 Prescription Management
+- Prescription can only be created if medical record exists
+- One-to-One relationship between MedicalRecord and Prescription
 
-Doctor → Department (Many-to-One)
+---
 
-Doctor Available Days stored using @ElementCollection
+## 🛡 Exception Handling
+- Custom exception classes
+- Centralized exception handling using `@RestControllerAdvice`
+- Standardized API response structure
 
-🔐 Business Logic Rules
+---
 
-Only BOOKED appointment can be updated to COMPLETED or CANCELED
+## 🗄 Database Relationships
+- One-to-Many (Doctor → Appointment)
+- One-to-Many (Patient → Appointment)
+- One-to-One (MedicalRecord → Prescription)
+- Many-to-One (Doctor → Department)
+- ElementCollection (Doctor → Available Days)
 
-Completed or Canceled appointments cannot be modified
+---
 
-Medical record can only be created after appointment is COMPLETED
+## 🧠 Business Logic Highlights
+- Appointment status validation
+- Conditional medical record creation
+- Conditional prescription creation
+- Data integrity enforcement
 
-Prescription can only be created if medical record exists
+---
 
-⚠ Exception Handling
+## 📌 Key Learnings
+- Designing layered backend architecture
+- Implementing JPA relationships
+- Handling complex business logic
+- Managing entity relationships and preventing circular JSON
+- Implementing global exception handling
 
-Custom exceptions for invalid IDs and business rule violations
+---
 
-Global exception handling using @RestControllerAdvice
+## 📷 API Testing
+All APIs were tested using Postman with structured JSON request/response format.
 
-Standardized API response structure
+---
 
-📦 API Testing
+## 📦 Future Improvements
+- Add authentication & role-based authorization
+- Implement pagination & sorting
+- Add Swagger documentation
+- Deploy on cloud platform (AWS / Render)
 
-All APIs were tested using Postman with proper JSON request and response handling.
+---
 
-📈 Future Improvements
-
-Add authentication and authorization (Spring Security)
-
-Add pagination and sorting
-
-Add slot-based appointment booking
-
-Deploy on cloud platform
+## 👨‍💻 Author
+Ashish Kumar Singh  
+Java Full Stack Developer
